@@ -1,9 +1,11 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
 //... your code here ...
-                                
-var port = process.env.PORT || 3000;
+            
+app.get('/', (req, res) => req.json('Hello World'));
+
+const port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log('Umbler listening on port %s', port);
 });
