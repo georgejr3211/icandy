@@ -5,6 +5,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import Sequelize from 'sequelize';
 
+import routes from './v1/routes';
+
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -20,11 +22,18 @@ sequelize.authenticate()
 .then(() => console.log('Conectado ao banco de dados'))
 .catch((err) => console.log('Falha ao se conectar:', err));
 
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get((req, res) => res.json({ apiName: 'icandy' }));
+app.get('/', (req, res) => {
+  res.json({
+    appName: 'iCandy'
+  });
+});
 
-const port = process.env.PORT || 3000;
+app.use('/', routes);
+
+const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Server on at port ${port}`));
