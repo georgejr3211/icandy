@@ -1,9 +1,13 @@
-import { Endereco } from "./model";
+import { Endereco } from '../enderecos/model';
+import { Loja } from './model';
 
 export async function getAllItems(params) {
   try {
-    const resources = await Endereco.findAndCountAll({
-      order: [['id', 'DESC']]
+    const resources = await Loja.findAndCountAll({
+      order: [['id', 'DESC']],
+      include: [{
+        model: Endereco,
+      }]
     });
 
     return resources;
@@ -14,7 +18,7 @@ export async function getAllItems(params) {
 
 export async function getOneItem(id) {
   try {
-    const resources = await Endereco.findByPk(id);
+    const resources = await Loja.findByPk(id, { include: Endereco });
 
     return resources;
   } catch (error) {
@@ -24,7 +28,7 @@ export async function getOneItem(id) {
 
 export async function createItem(data) {
   try {
-    const resources = await Endereco.create(data);
+    const resources = await Loja.create(data);
 
     return resources;
   } catch (error) {
@@ -34,7 +38,7 @@ export async function createItem(data) {
 
 export async function updateItem(id, data) {
   try {
-    const resources = await Endereco.findByPk(id)
+    const resources = await Loja.findByPk(id)
       .then(res => res.update(data))
       .catch(error => error);
 
@@ -46,7 +50,7 @@ export async function updateItem(id, data) {
 
 export async function deleteItem(id) {
   try {
-    const resources = await Endereco.destroy({ where: { id } })
+    const resources = await Loja.destroy({ where: { id } })
 
     return resources;
   } catch (error) {

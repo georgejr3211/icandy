@@ -1,9 +1,17 @@
-import { Endereco } from "./model";
+import { Loja } from '../lojas/model';
+import { Preco } from '../precos/model';
+import { Produto } from './model';
+import { Endereco } from '../enderecos/model';
 
 export async function getAllItems(params) {
   try {
-    const resources = await Endereco.findAndCountAll({
-      order: [['id', 'DESC']]
+    const resources = await Produto.findAndCountAll({
+      order: [['id', 'DESC']],
+      include: [{
+        model: Loja,
+      },{
+        model: Preco,
+      }]
     });
 
     return resources;
@@ -14,7 +22,11 @@ export async function getAllItems(params) {
 
 export async function getOneItem(id) {
   try {
-    const resources = await Endereco.findByPk(id);
+    const resources = await Produto.findByPk(id, { include: [{
+      model: Loja,
+    },{
+      model: Preco,
+    }] });
 
     return resources;
   } catch (error) {
@@ -24,7 +36,7 @@ export async function getOneItem(id) {
 
 export async function createItem(data) {
   try {
-    const resources = await Endereco.create(data);
+    const resources = await Produto.create(data, { include: [ Preco ] });
 
     return resources;
   } catch (error) {
@@ -34,7 +46,7 @@ export async function createItem(data) {
 
 export async function updateItem(id, data) {
   try {
-    const resources = await Endereco.findByPk(id)
+    const resources = await Produto.findByPk(id)
       .then(res => res.update(data))
       .catch(error => error);
 
@@ -46,7 +58,7 @@ export async function updateItem(id, data) {
 
 export async function deleteItem(id) {
   try {
-    const resources = await Endereco.destroy({ where: { id } })
+    const resources = await Produto.destroy({ where: { id } })
 
     return resources;
   } catch (error) {

@@ -4,7 +4,7 @@ const router = Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const results = await resourceService.getAllItems(req.body);
+    const results = await resourceService.getAllItems();
     return res.json(results);
   } catch (error) {
     next(`[GET] => ${error}`);
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-    const results = await resourceService.getAllItems(id);
+    const results = await resourceService.getOneItem(id);
     return res.json(results);
   } catch (error) {
     next(`[GET ID] => ${error}`);

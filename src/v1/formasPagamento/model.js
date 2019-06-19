@@ -2,9 +2,9 @@ import Sequelize from 'sequelize';
 import sequelize from  '../../config/connection';
 const Model = Sequelize.Model;
 
-export class Categoria extends Model {}
+export class FormaPagamento extends Model {}
 
-Categoria.init({
+FormaPagamento.init({
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -25,4 +25,4 @@ Categoria.init({
     allowNull: false,
     defaultValue: true,
   }
-}, { sequelize, modelName: 'categorias' });
+}, { sequelize, modelName: 'formas_pagamento', freezeTableName: true });

@@ -1,4 +1,4 @@
-import { Perfil } from "./model";
+import { Perfil } from './model';
 
 export async function getAllItems(params) {
   try {
@@ -14,9 +14,7 @@ export async function getAllItems(params) {
 
 export async function getOneItem(id) {
   try {
-    const resources = await Perfil.findAndCountAll({
-      order: [['id', 'DESC']]
-    });
+    const resources = await Perfil.findByPk(id);
 
     return resources;
   } catch (error) {

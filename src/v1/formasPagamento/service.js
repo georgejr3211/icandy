@@ -1,8 +1,8 @@
-import { Endereco } from "./model";
-
+import { FormaPagamento } from './model';
 export async function getAllItems(params) {
   try {
-    const resources = await Endereco.findAndCountAll({
+    const resources = await FormaPagamento.findAndCountAll({
+      where: { ativo: 1 },
       order: [['id', 'DESC']]
     });
 
@@ -14,7 +14,7 @@ export async function getAllItems(params) {
 
 export async function getOneItem(id) {
   try {
-    const resources = await Endereco.findByPk(id);
+    const resources = await FormaPagamento.findByPk(id);
 
     return resources;
   } catch (error) {
@@ -24,7 +24,7 @@ export async function getOneItem(id) {
 
 export async function createItem(data) {
   try {
-    const resources = await Endereco.create(data);
+    const resources = await FormaPagamento.create(data);
 
     return resources;
   } catch (error) {
@@ -34,7 +34,7 @@ export async function createItem(data) {
 
 export async function updateItem(id, data) {
   try {
-    const resources = await Endereco.findByPk(id)
+    const resources = await FormaPagamento.findByPk(id)
       .then(res => res.update(data))
       .catch(error => error);
 
@@ -46,7 +46,7 @@ export async function updateItem(id, data) {
 
 export async function deleteItem(id) {
   try {
-    const resources = await Endereco.destroy({ where: { id } })
+    const resources = await FormaPagamento.update({ ativo: false }, { where: { id } })
 
     return resources;
   } catch (error) {

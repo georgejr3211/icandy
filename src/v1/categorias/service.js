@@ -15,9 +15,8 @@ export async function getAllItems(params) {
 
 export async function getOneItem(id) {
   try {
-    const resources = await Categoria.findAndCountAll({
+    const resources = await Categoria.findByPk(id, {
       where: { ativo: 1, id },
-      order: [['id', 'DESC']]
     });
 
     return resources;
