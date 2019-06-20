@@ -36,7 +36,8 @@ export async function getOneItem(id) {
 
 export async function createItem(data) {
   try {
-    const resources = await Produto.create(data, { include: [ Preco ] });
+    console.log(data);
+    const resources = await Produto.create(data, { include: [{ association: Preco, as: 'precos', }] });
 
     return resources;
   } catch (error) {
