@@ -61,5 +61,11 @@ router.use('/status-pedidos', _ctrl13.default);
 router.use('/cupons', _ctrl2.default);
 router.use('/pedidos', _ctrl7.default);
 router.use('/pedidos-produtos', _ctrl8.default);
+router.get('/routes', (req, res, next) => {
+  const routes = ['/categorias', '/perfis', '/enderecos', '/formas-pagamentos', '/lojas', '/usuarios', '/unidade-medidas', '/precos', '/produtos', '/telefones-usuarios', '/produtos-categorias', '/estoques', '/telefones-lojas', '/status-pedidos', '/cupons', '/pedidos', '/pedidos-produtos'];
+  return res.json({
+    routes
+  });
+});
 var _default = router;
 exports.default = _default;
