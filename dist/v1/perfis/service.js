@@ -12,44 +12,34 @@ exports.deleteItem = deleteItem;
 var _model = require("./model");
 
 async function getAllItems(params) {
-  try {
-    const resources = await _model.Perfil.findAndCountAll({
-      order: [['id', 'DESC']]
-    });
-    return resources;
-
+  const resources = await _model.Perfil.findAndCountAll({
+    order: [['id', 'DESC']],
+    limit: params.limit,
+    offset: params.page
+  });
+  return resources;
 }
 
 async function getOneItem(id) {
-  try {
-    const resources = await _model.Perfil.findAndCountAll({
-      order: [['id', 'DESC']]
-    });
-    return resources;
-
+  const resources = await _model.Perfil.findByPk(id);
+  return resources;
 }
 
 async function createItem(data) {
-  try {
-    const resources = await _model.Perfil.create(data);
-    return resources;
-
+  const resources = await _model.Perfil.create(data);
+  return resources;
 }
 
 async function updateItem(id, data) {
-  try {
-    const resources = await _model.Perfil.findByPk(id).then(res => res.update(data)).catch(error => error);
-    return resources;
-
+  const resources = await _model.Perfil.findByPk(id).then(res => res.update(data)).catch(error => error);
+  return resources;
 }
 
 async function deleteItem(id) {
-  try {
-    const resources = await _model.Perfil.destroy({
-      where: {
-        id
-      }
-    });
-    return resources;
-
+  const resources = await _model.Perfil.destroy({
+    where: {
+      id
+    }
+  });
+  return resources;
 }

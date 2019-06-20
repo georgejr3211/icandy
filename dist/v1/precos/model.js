@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Categoria = void 0;
+exports.Preco = void 0;
 
 var _sequelize = _interopRequireDefault(require("sequelize"));
 
@@ -13,31 +13,39 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const Model = _sequelize.default.Model;
 
-class Categoria extends Model {}
+class Preco extends Model {}
 
-exports.Categoria = Categoria;
-Categoria.init({
+exports.Preco = Preco;
+Preco.init({
   id: {
     type: _sequelize.default.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  descricao: {
-    type: _sequelize.default.STRING(30),
+  dt_inicio: {
+    type: _sequelize.default.DATE,
     allowNull: false,
     validate: {
-      len: {
-        msg: '3 a 30 caracteres!',
-        args: [3, 30]
-      }
+      notNull: true,
+      notEmpty: true,
+      isDate: true
     }
   },
-  ativo: {
-    type: _sequelize.default.BOOLEAN,
+  dt_fim: {
+    type: _sequelize.default.DATE,
     allowNull: false,
-    defaultValue: true
+    validate: {
+      notNull: true,
+      notEmpty: true,
+      isDate: true
+    }
+  },
+  preco: {
+    type: _sequelize.default.DECIMAL(6, 2),
+    allowNull: false
   }
 }, {
   sequelize: _connection.default,
-  modelName: 'categorias'
+  modelName: 'precos',
+  freezeTableName: true
 });

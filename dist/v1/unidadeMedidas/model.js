@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Categoria = void 0;
+exports.UnidadeMedida = void 0;
 
 var _sequelize = _interopRequireDefault(require("sequelize"));
 
@@ -13,10 +13,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const Model = _sequelize.default.Model;
 
-class Categoria extends Model {}
+class UnidadeMedida extends Model {}
 
-exports.Categoria = Categoria;
-Categoria.init({
+exports.UnidadeMedida = UnidadeMedida;
+UnidadeMedida.init({
   id: {
     type: _sequelize.default.INTEGER,
     primaryKey: true,
@@ -26,18 +26,12 @@ Categoria.init({
     type: _sequelize.default.STRING(30),
     allowNull: false,
     validate: {
-      len: {
-        msg: '3 a 30 caracteres!',
-        args: [3, 30]
-      }
+      notNull: true,
+      notEmpty: true
     }
-  },
-  ativo: {
-    type: _sequelize.default.BOOLEAN,
-    allowNull: false,
-    defaultValue: true
   }
 }, {
   sequelize: _connection.default,
-  modelName: 'categorias'
+  modelName: 'unidade_medidas',
+  freezeTableName: true
 });

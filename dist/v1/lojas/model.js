@@ -3,41 +3,51 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Categoria = void 0;
+exports.Loja = void 0;
 
 var _sequelize = _interopRequireDefault(require("sequelize"));
 
 var _connection = _interopRequireDefault(require("../../config/connection"));
 
+var _model = require("../enderecos/model");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const Model = _sequelize.default.Model;
 
-class Categoria extends Model {}
+class Loja extends Model {}
 
-exports.Categoria = Categoria;
-Categoria.init({
+exports.Loja = Loja;
+Loja.init({
   id: {
     type: _sequelize.default.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  descricao: {
-    type: _sequelize.default.STRING(30),
+  nome: {
+    type: _sequelize.default.STRING(40),
+    allowNull: false
+  },
+  cnpj: {
+    type: _sequelize.default.STRING(20),
     allowNull: false,
     validate: {
       len: {
-        msg: '3 a 30 caracteres!',
-        args: [3, 30]
+        msg: 'Deve haver 14 caracteres',
+        args: [14, 14]
       }
     }
   },
-  ativo: {
-    type: _sequelize.default.BOOLEAN,
-    allowNull: false,
-    defaultValue: true
+  enderecosid: {
+    type: _sequelize.default.INTEGER,
+    allowNull: false
   }
 }, {
   sequelize: _connection.default,
-  modelName: 'categorias'
+  modelName: 'lojas',
+  freezeTableName: true
+});
+Loja.hasOne(_model.Endereco, {
+  sourceKey: 'enderecosid',
+  foreignKey: 'id'
 });

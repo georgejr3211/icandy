@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Categoria = void 0;
+exports.StatusPedido = void 0;
 
 var _sequelize = _interopRequireDefault(require("sequelize"));
 
@@ -13,10 +13,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const Model = _sequelize.default.Model;
 
-class Categoria extends Model {}
+class StatusPedido extends Model {}
 
-exports.Categoria = Categoria;
-Categoria.init({
+exports.StatusPedido = StatusPedido;
+StatusPedido.init({
   id: {
     type: _sequelize.default.INTEGER,
     primaryKey: true,
@@ -24,20 +24,10 @@ Categoria.init({
   },
   descricao: {
     type: _sequelize.default.STRING(30),
-    allowNull: false,
-    validate: {
-      len: {
-        msg: '3 a 30 caracteres!',
-        args: [3, 30]
-      }
-    }
-  },
-  ativo: {
-    type: _sequelize.default.BOOLEAN,
-    allowNull: false,
-    defaultValue: true
+    allowNull: false
   }
 }, {
   sequelize: _connection.default,
-  modelName: 'categorias'
+  modelName: 'status_pedidos',
+  freezeTableName: true
 });

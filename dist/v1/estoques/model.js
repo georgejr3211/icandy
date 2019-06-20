@@ -3,41 +3,40 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Categoria = void 0;
+exports.Estoque = void 0;
 
 var _sequelize = _interopRequireDefault(require("sequelize"));
 
 var _connection = _interopRequireDefault(require("../../config/connection"));
 
+var _model = require("../produtos/model");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const Model = _sequelize.default.Model;
 
-class Categoria extends Model {}
+class Estoque extends Model {}
 
-exports.Categoria = Categoria;
-Categoria.init({
+exports.Estoque = Estoque;
+Estoque.init({
   id: {
     type: _sequelize.default.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  descricao: {
-    type: _sequelize.default.STRING(30),
-    allowNull: false,
-    validate: {
-      len: {
-        msg: '3 a 30 caracteres!',
-        args: [3, 30]
-      }
-    }
+  quantidade: {
+    type: _sequelize.default.INTEGER,
+    allowNull: false
   },
-  ativo: {
-    type: _sequelize.default.BOOLEAN,
-    allowNull: false,
-    defaultValue: true
+  produtosid: {
+    type: _sequelize.default.INTEGER,
+    allowNull: false
   }
 }, {
   sequelize: _connection.default,
-  modelName: 'categorias'
+  modelName: 'estoques'
+});
+Estoque.hasOne(_model.Produto, {
+  foreignKey: 'id',
+  sourceKey: 'produtosid'
 });

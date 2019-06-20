@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Categoria = void 0;
+exports.FormaPagamento = void 0;
 
 var _sequelize = _interopRequireDefault(require("sequelize"));
 
@@ -13,10 +13,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const Model = _sequelize.default.Model;
 
-class Categoria extends Model {}
+class FormaPagamento extends Model {}
 
-exports.Categoria = Categoria;
-Categoria.init({
+exports.FormaPagamento = FormaPagamento;
+FormaPagamento.init({
   id: {
     type: _sequelize.default.INTEGER,
     primaryKey: true,
@@ -39,5 +39,6 @@ Categoria.init({
   }
 }, {
   sequelize: _connection.default,
-  modelName: 'categorias'
+  modelName: 'formas_pagamento',
+  freezeTableName: true
 });

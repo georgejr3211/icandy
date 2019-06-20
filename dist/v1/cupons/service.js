@@ -9,11 +9,14 @@ exports.createItem = createItem;
 exports.updateItem = updateItem;
 exports.deleteItem = deleteItem;
 
-var _model = require("./model");
+var _model = require("../unidadeMedidas/model");
+
+var _model2 = require("./model");
 
 async function getAllItems(params) {
-  const resources = await _model.Endereco.findAndCountAll({
+  const resources = await _model2.Cupom.findAndCountAll({
     order: [['id', 'DESC']],
+    include: _model.UnidadeMedida,
     limit: params.limit,
     offset: params.page
   });
@@ -21,22 +24,24 @@ async function getAllItems(params) {
 }
 
 async function getOneItem(id) {
-  const resources = await _model.Endereco.findByPk(id);
+  const resources = await _model2.Cupom.findByPk(id, {
+    include: _model.UnidadeMedida
+  });
   return resources;
 }
 
 async function createItem(data) {
-  const resources = await _model.Endereco.create(data);
+  const resources = await _model2.Cupom.create(data);
   return resources;
 }
 
 async function updateItem(id, data) {
-  const resources = await _model.Endereco.findByPk(id).then(res => res.update(data)).catch(error => error);
+  const resources = await _model2.Cupom.findByPk(id).then(res => res.update(data)).catch(error => error);
   return resources;
 }
 
 async function deleteItem(id) {
-  const resources = await _model.Endereco.destroy({
+  const resources = await _model2.Cupom.destroy({
     where: {
       id
     }

@@ -16,6 +16,7 @@ const sequelize = new _sequelize.default(process.env.DB_NAME, process.env.DB_USE
   host: process.env.DB_HOST,
   dialect: process.env.DB_TYPE,
   port: process.env.DB_PORT,
+  logging: false,
   define: {
     timestamps: false
   }
