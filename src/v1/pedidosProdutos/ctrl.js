@@ -1,5 +1,7 @@
 import { Router } from 'express';
+
 import * as resourceService from './service';
+
 const router = Router();
 
 router.get('/', async (req, res, next) => {

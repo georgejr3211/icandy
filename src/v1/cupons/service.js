@@ -1,8 +1,10 @@
-import { Perfil } from './model';
+import { UnidadeMedida } from '../unidadeMedidas/model';
+import { Cupom } from './model';
 
 export async function getAllItems(params) {
-  const resources = await Perfil.findAndCountAll({
+  const resources = await Cupom.findAndCountAll({
     order: [['id', 'DESC']],
+    include: UnidadeMedida,
     limit: params.limit,
     offset: params.page
   });
@@ -11,19 +13,19 @@ export async function getAllItems(params) {
 }
 
 export async function getOneItem(id) {
-  const resources = await Perfil.findByPk(id);
+  const resources = await Cupom.findByPk(id, { include: UnidadeMedida });
 
   return resources;
 }
 
 export async function createItem(data) {
-  const resources = await Perfil.create(data);
+  const resources = await Cupom.create(data);
 
   return resources;
 }
 
 export async function updateItem(id, data) {
-  const resources = await Perfil.findByPk(id)
+  const resources = await Cupom.findByPk(id)
     .then(res => res.update(data))
     .catch(error => error);
 
@@ -31,7 +33,7 @@ export async function updateItem(id, data) {
 }
 
 export async function deleteItem(id) {
-  const resources = await Perfil.destroy({ where: { id } })
+  const resources = await Cupom.destroy({ where: { id } })
 
   return resources;
 }

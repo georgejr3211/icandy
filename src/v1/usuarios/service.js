@@ -3,64 +3,59 @@ import { Perfil } from '../perfis/model';
 import { Usuario } from './model';
 
 export async function getAllItems(params) {
-  try {
-    const resources = await Usuario.findAndCountAll({
-      order: [['id', 'DESC']],
-      include: [{
-        model: Endereco,
-      },{
-        model: Perfil,
-      }]
-    });
-
-    return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
-}
-
-export async function getOneItem(id) {
-  try {
-    const resources = await Usuario.findByPk(id, { include: [{
+  const resources = await Usuario.findAndCountAll({
+    order: [['id', 'DESC']],
+    where: {
+      ativo: 1
+    },
+    include: [{
       model: Endereco,
     },{
       model: Perfil,
-    }] });
+    }],
+    limit: params.limit,
+    offset: params.page
+  });
 
-    return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+  return resources;
+
+}
+
+export async function getOneItem(id) {
+  const resources = await Usuario.findByPk(id, {
+    where: {
+      ativo: 1
+    },
+    include: [{
+      model: Endereco,
+    },{
+      model: Perfil,
+    }]
+  });
+
+  return resources;
+
 }
 
 export async function createItem(data) {
-  try {
-    const resources = await Usuario.create(data);
+  const resources = await Usuario.create(data);
 
-    return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+  return resources;
+
 }
 
 export async function updateItem(id, data) {
-  try {
-    const resources = await Usuario.findByPk(id)
-      .then(res => res.update(data))
-      .catch(error => error);
+  const resources = await Usuario.findByPk(id)
+    .then(res => res.update(data))
+    .catch(error => error);
 
-    return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+  return resources;
+
 }
 
 export async function deleteItem(id) {
-  try {
-    const resources = await Usuario.destroy({ where: { id } })
+  const resources = await Usuario.update({ ativo: false }, { where: { id } })
 
-    return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+  return resources;
+
 }

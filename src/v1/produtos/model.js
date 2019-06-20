@@ -1,8 +1,8 @@
 import Sequelize from 'sequelize';
 
 import sequelize from '../../config/connection';
-import { Preco } from '../precos/model';
 import { Loja } from '../lojas/model';
+import { Preco } from '../precos/model';
 
 const Model = Sequelize.Model;
 
@@ -56,10 +56,10 @@ Produto.init({
   },
   lojasid: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    allowNull: true,
   }
   
 }, { sequelize, modelName: 'produtos', freezeTableName: true});
 
-Produto.hasOne(Preco, { sourceKey: 'precosid', foreignKey: 'id', as: 'preco' });
+Produto.hasOne(Preco, { sourceKey: 'precosid', foreignKey: 'id' });
 Produto.belongsTo(Loja, { sourceKey: 'lojasid', foreignKey: 'id' });

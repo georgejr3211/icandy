@@ -29,11 +29,7 @@ Loja.init({
   },
   enderecosid: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    references: {
-      model: Endereco,
-      key: 'id'
-    }
+    allowNull: false
   }
 }, { sequelize, modelName: 'lojas', freezeTableName: true});
 

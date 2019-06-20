@@ -1,33 +1,31 @@
-import { Endereco } from '../enderecos/model';
-import { Loja } from './model';
+import { Usuario } from '../usuarios/model';
+import { TelefoneUsuario } from './model';
 
 export async function getAllItems(params) {
-  const resources = await Loja.findAndCountAll({
+  const resources = await TelefoneUsuario.findAndCountAll({
     order: [['id', 'DESC']],
     include: [{
-      model: Endereco,
-    }],
-    limit: params.limit,
-    offset: params.page
+      model: Usuario,
+    }]
   });
 
   return resources;
 }
 
 export async function getOneItem(id) {
-  const resources = await Loja.findByPk(id, { include: Endereco });
+  const resources = await TelefoneUsuario.findByPk(id, { include: Usuario });
 
   return resources;
 }
 
 export async function createItem(data) {
-  const resources = await Loja.create(data, { include: Endereco });
+  const resources = await TelefoneUsuario.create(data);
 
   return resources;
 }
 
 export async function updateItem(id, data) {
-  const resources = await Loja.findByPk(id)
+  const resources = await TelefoneUsuario.findByPk(id)
     .then(res => res.update(data))
     .catch(error => error);
 
@@ -35,7 +33,7 @@ export async function updateItem(id, data) {
 }
 
 export async function deleteItem(id) {
-  const resources = await Loja.destroy({ where: { id } })
+  const resources = await TelefoneUsuario.destroy({ where: { id } })
 
   return resources;
 }

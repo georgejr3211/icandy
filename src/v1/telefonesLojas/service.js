@@ -1,29 +1,31 @@
-import { Perfil } from './model';
+import { Loja } from '../lojas/model';
+import { TelefoneLoja } from './model';
 
 export async function getAllItems(params) {
-  const resources = await Perfil.findAndCountAll({
+  const resources = await TelefoneLoja.findAndCountAll({
     order: [['id', 'DESC']],
-    limit: params.limit,
-    offset: params.page
+    include: [{
+      model: Loja,
+    }]
   });
 
   return resources;
 }
 
 export async function getOneItem(id) {
-  const resources = await Perfil.findByPk(id);
+  const resources = await TelefoneLoja.findByPk(id, { include: Loja });
 
   return resources;
 }
 
 export async function createItem(data) {
-  const resources = await Perfil.create(data);
+  const resources = await TelefoneLoja.create(data);
 
   return resources;
 }
 
 export async function updateItem(id, data) {
-  const resources = await Perfil.findByPk(id)
+  const resources = await TelefoneLoja.findByPk(id)
     .then(res => res.update(data))
     .catch(error => error);
 
@@ -31,7 +33,7 @@ export async function updateItem(id, data) {
 }
 
 export async function deleteItem(id) {
-  const resources = await Perfil.destroy({ where: { id } })
+  const resources = await TelefoneLoja.destroy({ where: { id } })
 
   return resources;
 }

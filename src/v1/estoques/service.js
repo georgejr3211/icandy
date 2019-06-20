@@ -1,9 +1,10 @@
-import { Categoria } from "./model";
+import { Produto } from '../produtos/model';
+import { Estoque } from './model';
 
 export async function getAllItems(params) {
-  const resources = await Categoria.findAll({
-      where: { ativo: 1 },
+  const resources = await Estoque.findAll({
       order: [['id', 'DESC']],
+      include: [Produto],
       limit: params.limit,
       offset: params.page
     });
@@ -12,21 +13,21 @@ export async function getAllItems(params) {
 }
 
 export async function getOneItem(id) {
-  const resources = await Categoria.findByPk(id, {
-      where: { ativo: 1, id },
+  const resources = await Estoque.findByPk(id, {
+      include: [Produto]
     });
 
   return resources;
 }
 
 export async function createItem(data) {
-  const resources = await Categoria.create(data);
+  const resources = Estoque.create(data);
 
   return resources;
 }
 
 export async function updateItem(id, data) {
-  const resources = await Categoria.findByPk(id)
+  const resources = await Estoque.findByPk(id)
       .then(res => res.update(data))
       .catch(error => error);
 
@@ -34,7 +35,7 @@ export async function updateItem(id, data) {
 }
 
 export async function deleteItem(id) {
-  const resources = await Categoria.update({ ativo: false }, { where: { id } })
+  const resources = await Estoque.destroy({ where: { id } })
 
   return resources;
 }

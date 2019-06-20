@@ -1,55 +1,38 @@
 import { Preco } from './model';
 
 export async function getAllItems(params) {
-  try {
     const resources = await Preco.findAndCountAll({
       order: [['id', 'DESC']],
+      limit: params.limit,
+      offset: params.page
     });
 
     return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+
 }
 
 export async function getOneItem(id) {
-  try {
-    const resources = await Preco.findByPk(id);
+  const resources = await Preco.findByPk(id);
 
-    return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+  return resources;
 }
 
 export async function createItem(data) {
-  try {
-    const resources = await Preco.create(data);
+  const resources = await Preco.create(data);
 
-    return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+  return resources;
 }
 
 export async function updateItem(id, data) {
-  try {
-    const resources = await Preco.findByPk(id)
-      .then(res => res.update(data))
-      .catch(error => error);
+  const resources = await Preco.findByPk(id)
+    .then(res => res.update(data))
+    .catch(error => error);
 
-    return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+  return resources;
 }
 
 export async function deleteItem(id) {
-  try {
-    const resources = await Preco.destroy({ where: { id } })
+  const resources = await Preco.destroy({ where: { id } })
 
-    return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+  return resources;
 }

@@ -17,9 +17,7 @@ async function getAllItems(params) {
       order: [['id', 'DESC']]
     });
     return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+
 }
 
 async function getOneItem(id) {
@@ -28,27 +26,21 @@ async function getOneItem(id) {
       order: [['id', 'DESC']]
     });
     return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+
 }
 
 async function createItem(data) {
   try {
     const resources = await _model.Endereco.create(data);
     return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+
 }
 
 async function updateItem(id, data) {
   try {
     const resources = await _model.Endereco.findByPk(id).then(res => res.update(data)).catch(error => error);
     return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+
 }
 
 async function deleteItem(id) {
@@ -59,7 +51,5 @@ async function deleteItem(id) {
       }
     });
     return resources;
-  } catch (error) {
-    throw new Error(error);
-  }
+
 }
