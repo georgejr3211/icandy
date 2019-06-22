@@ -21,5 +21,17 @@ Endereco.init({
   complemento: {
     type: Sequelize.STRING(40),
     allowNull: true
+  },
+  rua: {
+    type: Sequelize.STRING(100),
+    allowNull: false
+  },
+  bairro: {
+    type: Sequelize.STRING(100),
+    allowNull: false
+  },
+  cidade: {
+    type: Sequelize.STRING(40),
+    allowNull: true
   }
 }, { sequelize, modelName: 'enderecos' });
