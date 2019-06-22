@@ -37,4 +37,4 @@ Preco.init({
     allowNull: false
   }
   
-}, { sequelize, modelName: 'precos', freezeTableName: true, createdAt, updatedAt});
+}, { sequelize, modelName: 'precos', freezeTableName: true, createdAt: true, updatedAt: true});

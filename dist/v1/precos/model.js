@@ -50,6 +50,6 @@ Preco.init({
   sequelize: _connection.default,
   modelName: 'precos',
   freezeTableName: true,
-  createdAt,
-  updatedAt
+  createdAt: true,
+  updatedAt: true
 });
