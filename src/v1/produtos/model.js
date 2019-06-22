@@ -62,4 +62,4 @@ Produto.init({
 }, { sequelize, modelName: 'produtos', freezeTableName: true});
 
 Produto.hasOne(Preco, { sourceKey: 'precosid', foreignKey: 'id' });
-Produto.belongsTo(Loja, { sourceKey: 'lojasid', foreignKey: 'id' });
+Produto.hasOne(Loja, { sourceKey: 'lojasid', foreignKey: 'id' });

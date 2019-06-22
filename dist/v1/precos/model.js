@@ -22,12 +22,11 @@ Preco.init({
     primaryKey: true,
     autoIncrement: true
   },
-  createdAt: {
-    field: 'dt_inicio',
-    type: _sequelize.default.DATE
+  dt_inicio: {
+    type: _sequelize.default.DATE,
+    defaultValue: new Date()
   },
-  updatedAt: {
-    field: 'dt_fim',
+  dt_fim: {
     type: _sequelize.default.DATE
   },
   preco: {
@@ -37,7 +36,5 @@ Preco.init({
 }, {
   sequelize: _connection.default,
   modelName: 'precos',
-  freezeTableName: true,
-  createdAt: true,
-  updatedAt: true
+  freezeTableName: true
 });

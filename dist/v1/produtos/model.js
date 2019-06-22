@@ -79,7 +79,7 @@ Produto.hasOne(_model2.Preco, {
   sourceKey: 'precosid',
   foreignKey: 'id'
 });
-Produto.belongsTo(_model.Loja, {
+Produto.hasOne(_model.Loja, {
   sourceKey: 'lojasid',
   foreignKey: 'id'
 });
