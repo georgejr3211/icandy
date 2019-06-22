@@ -15,22 +15,10 @@ Preco.init({
   createdAt: {
     field: 'dt_inicio',
     type: Sequelize.DATE,
-    allowNull: false,
-    validate: {
-      notNull: true,
-      notEmpty: true,
-      isDate: true
-    }
   },
   updatedAt: {
     field: 'dt_fim',
     type: Sequelize.DATE,
-    allowNull: false,
-    validate: {
-      notNull: true,
-      notEmpty: true,
-      isDate: true
-    }
   },
   preco: {
     type: Sequelize.DECIMAL(6, 2),
