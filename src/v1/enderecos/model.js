@@ -33,5 +33,9 @@ Endereco.init({
   cidade: {
     type: Sequelize.STRING(40),
     allowNull: true
-  }
+  },
+  uf: {
+    type: Sequelize.STRING(2),
+    allowNull: false
+  },
 }, { sequelize, modelName: 'enderecos' });
