@@ -10,6 +10,10 @@ import produtosController from './produtos/ctrl';
 import unidadeMedidasController from './unidadeMedidas/ctrl';
 import usuariosController from './usuarios/ctrl';
 import telefonesUsuarioController from './telefonesUsuario/ctrl';
+import cuponsController from './cupons/ctrl';
+import estoquesController from './estoques/ctrl';
+
+
 
 const router = Router();
 
@@ -23,5 +27,7 @@ router.use('/unidade-medidas', unidadeMedidasController);
 router.use('/precos', precosController);
 router.use('/produtos', produtosController);
 router.use('/telefones-usuario', telefonesUsuarioController);
+router.use('/cupons', cuponsController);
+router.use('/estoques', estoquesController);
 
 export default router;
