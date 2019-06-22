@@ -33,6 +33,18 @@ Endereco.init({
   complemento: {
     type: _sequelize.default.STRING(40),
     allowNull: true
+  },
+  rua: {
+    type: _sequelize.default.STRING(100),
+    allowNull: false
+  },
+  bairro: {
+    type: _sequelize.default.STRING(100),
+    allowNull: false
+  },
+  cidade: {
+    type: _sequelize.default.STRING(40),
+    allowNull: true
   }
 }, {
   sequelize: _connection.default,

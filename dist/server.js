@@ -6,8 +6,6 @@ var _express = _interopRequireDefault(require("express"));
 
 var _morgan = _interopRequireDefault(require("morgan"));
 
-var _listRoutes = _interopRequireDefault(require("./utils/listRoutes"));
-
 var _routes = _interopRequireDefault(require("./v1/routes"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
