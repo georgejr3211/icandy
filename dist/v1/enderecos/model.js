@@ -45,6 +45,10 @@ Endereco.init({
   cidade: {
     type: _sequelize.default.STRING(40),
     allowNull: true
+  },
+  uf: {
+    type: _sequelize.default.STRING(2),
+    allowNull: false
   }
 }, {
   sequelize: _connection.default,
