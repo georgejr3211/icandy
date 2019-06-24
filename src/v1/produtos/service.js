@@ -1,11 +1,12 @@
 import { Loja } from '../lojas/model';
 import { Preco } from '../precos/model';
+import { UnidadeMedida } from '../unidadeMedidas/model';
 import { Produto } from './model';
 
 export async function getAllItems(params) {
   const resources = await Produto.findAndCountAll({
     order: [['id', 'DESC']],
-    include: [Preco, Loja],
+    include: [Preco, Loja, UnidadeMedida],
     limit: params.limit,
     offset: params.page
   });
@@ -15,11 +16,7 @@ export async function getAllItems(params) {
 
 export async function getOneItem(id) {
   const resources = await Produto.findByPk(id, {
-    include: [{
-      model: Loja,
-    },{
-      model: Preco,
-    }]
+    include: [Preco, Loja, UnidadeMedida],
   });
 
   return resources;

@@ -13,6 +13,8 @@ var _model = require("../lojas/model");
 
 var _model2 = require("../precos/model");
 
+var _model3 = require("../unidadeMedidas/model");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const Model = _sequelize.default.Model;
@@ -81,5 +83,9 @@ Produto.hasOne(_model2.Preco, {
 });
 Produto.hasOne(_model.Loja, {
   sourceKey: 'lojasid',
+  foreignKey: 'id'
+});
+Produto.hasOne(_model3.UnidadeMedida, {
+  sourceKey: 'unidade_medidasid',
   foreignKey: 'id'
 });

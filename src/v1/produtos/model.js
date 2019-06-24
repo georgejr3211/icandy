@@ -3,6 +3,7 @@ import Sequelize from 'sequelize';
 import sequelize from '../../config/connection';
 import { Loja } from '../lojas/model';
 import { Preco } from '../precos/model';
+import { UnidadeMedida } from '../unidadeMedidas/model';
 
 const Model = Sequelize.Model;
 
@@ -63,3 +64,4 @@ Produto.init({
 
 Produto.hasOne(Preco, { sourceKey: 'precosid', foreignKey: 'id' });
 Produto.hasOne(Loja, { sourceKey: 'lojasid', foreignKey: 'id' });
+Produto.hasOne(UnidadeMedida, { sourceKey: 'unidade_medidasid', foreignKey: 'id' });
