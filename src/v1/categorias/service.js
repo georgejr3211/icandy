@@ -1,19 +1,38 @@
-import { Categoria } from "./model";
+import { Produto } from '../produtos/model';
+import { Categoria } from './model';
+import { Preco } from '../precos/model';
 
 export async function getAllItems(params) {
   const resources = await Categoria.findAll({
       where: { ativo: 1 },
       order: [['id', 'DESC']],
       limit: params.limit,
-      offset: params.page
+      offset: params.page,
+      include: [{
+        model: Produto,
+        required: false,
+        through: { attributes: [] },
+        include: [Preco]
+      }]
     });
 
   return resources;
 }
 
 export async function getOneItem(id) {
-  const resources = await Categoria.findByPk(id, {
-      where: { ativo: 1, id },
+  const resources = await Categoria.findAll({
+      where: { ativo: 1 },
+      include: [{
+        model: Produto,
+        required: true,
+        where: {
+          lojasid: id
+        },
+        through: { attributes: [] },
+        include: [{
+          model: Preco,
+        }]
+      }]
     });
 
   return resources;

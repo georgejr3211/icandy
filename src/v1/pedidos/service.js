@@ -24,6 +24,7 @@ export async function getOneItem(id) {
 }
 
 export async function createItem(data) {
+  console.log('data', data);
   const resources = Pedido.create(data);
 
   return resources;

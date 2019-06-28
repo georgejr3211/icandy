@@ -1,5 +1,9 @@
 import Sequelize from 'sequelize';
-import sequelize from  '../../config/connection';
+
+import sequelize from '../../config/connection';
+import { Produto } from '../produtos/model';
+import { ProdutoCategoria } from '../produtosCategorias/model';
+
 const Model = Sequelize.Model;
 
 export class Categoria extends Model {}
@@ -20,9 +24,15 @@ Categoria.init({
       }
     }
   },
+  foto: {
+    type: Sequelize.STRING(150),
+    allowNull: true
+  },
   ativo: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: true,
   }
 }, { sequelize, modelName: 'categorias' });
+
+Categoria.belongsToMany(Produto, { through: ProdutoCategoria, foreignKey: 'categoriasid', otherKey: 'produtosid' });

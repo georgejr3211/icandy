@@ -29,12 +29,6 @@ Cupom.init({
   valor: {
     type: Sequelize.DECIMAL(6, 2),
     allowNull: false
-  },
-  unidade_medidasid: {
-    type: Sequelize.INTEGER,
-    allowNull: false
   }
   
 }, { sequelize, modelName: 'cupons', freezeTableName: true});
-
-Cupom.hasOne(UnidadeMedida, { sourceKey: 'unidade_medidasid', foreignKey: 'id' });

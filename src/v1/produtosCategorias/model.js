@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
-import sequelize from  '../../config/connection';
-import { Categoria } from '../categorias/model';
-import { Produto } from '../produtos/model';
+
+import sequelize from '../../config/connection';
+
 const Model = Sequelize.Model;
 
 export class ProdutoCategoria extends Model {}
@@ -21,6 +21,20 @@ ProdutoCategoria.init({
     allowNull: false
   }
 }, { sequelize, modelName: 'produtos_categorias' });
+// sourceKey: 'precosid', foreignKey: 'id'
+// ProdutoCategoria.belongsTo(Produto,  {targetKey: 'produtosid', foreignKey: 'id' } );
 
-ProdutoCategoria.hasOne(Produto, { foreignKey: 'id', sourceKey: 'produtosid' });
-ProdutoCategoria.hasOne(Categoria, { foreignKey: 'id', sourceKey: 'categoriasid' });
+// Produto.belongsToMany(Categoria, {
+//   through: ProdutoCategoria,
+//   foreignKey: 'produtosid',
+//   otherKey: 'id'
+// });
+
+// Categoria.belongsToMany(Produto, {
+//   through: ProdutoCategoria,
+//   foreignKey: 'categoriasid',
+//   otherKey: 'id'
+// });
+
+// export const Prod = Produto;
+// export const Cat = Categoria;

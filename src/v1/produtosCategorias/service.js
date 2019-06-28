@@ -1,21 +1,21 @@
-import { Categoria } from '../categorias/model';
-import { Produto } from '../produtos/model';
-import { ProdutoCategoria } from './model';
+import { Prod, ProdutoCategoria } from './model';
 
 export async function getAllItems(params) {
   const resources = await ProdutoCategoria.findAll({
-      order: [['id', 'DESC']],
-      include: [Produto, Categoria],
-      limit: params.limit,
-      offset: params.page
-    });
+    // include: [Prod]
+  })
+  // const resources = await ProdutoCategoria.findAll({
+  //     order: [['id', 'DESC']],
+  //     limit: params.limit,
+  //     offset: params.page
+  //   });
 
   return resources;
 }
 
 export async function getOneItem(id) {
   const resources = await ProdutoCategoria.findByPk(id, {
-      include: [Produto, Categoria]
+      // include: [Produto, Categoria]
     });
 
   return resources;

@@ -2,11 +2,13 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import morgan from 'morgan';
 import routes from './v1/routes';
+import cors from 'cors';
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan(':method :url :response-time :status'));
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.json({

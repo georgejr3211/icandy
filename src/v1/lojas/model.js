@@ -17,6 +17,10 @@ Loja.init({
     type: Sequelize.STRING(40),
     allowNull: false
   },
+  logo: {
+    type: Sequelize.STRING(150),
+    allowNull: true
+  },
   cnpj: {
     type: Sequelize.STRING(20),
     allowNull: false,

@@ -1,10 +1,8 @@
-import { UnidadeMedida } from '../unidadeMedidas/model';
 import { Cupom } from './model';
 
 export async function getAllItems(params) {
   const resources = await Cupom.findAndCountAll({
     order: [['id', 'DESC']],
-    include: UnidadeMedida,
     limit: params.limit,
     offset: params.page
   });
@@ -13,7 +11,7 @@ export async function getAllItems(params) {
 }
 
 export async function getOneItem(id) {
-  const resources = await Cupom.findByPk(id, { include: UnidadeMedida });
+  const resources = await Cupom.findByPk(id);
 
   return resources;
 }

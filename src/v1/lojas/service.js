@@ -4,9 +4,9 @@ import { Loja } from './model';
 export async function getAllItems(params) {
   const resources = await Loja.findAndCountAll({
     order: [['id', 'DESC']],
-    include: [{
-      model: Endereco,
-    }],
+    // include: [{
+    //   model: Endereco,
+    // }],
     limit: params.limit,
     offset: params.page
   });
